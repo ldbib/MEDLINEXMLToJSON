@@ -8,6 +8,8 @@ Wikipedia has an article regarding MEDLINE® here https://en.wikipedia.org/wiki/
 
 The U.S. National Library of Medicine have a page about MEDLINE® here http://www.nlm.nih.gov/pubs/factsheets/medline.html
 
+It's developed for the 2014 version of the MEDLINE® XML DTD (Document type definition).
+
 ## Dependencies
 The only dependency is the XML parser [sax](https://github.com/isaacs/sax-js) by [Isaac Z. Schlueter](https://github.com/isaacs).
 
