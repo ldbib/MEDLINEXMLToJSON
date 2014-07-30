@@ -1,0 +1,222 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE MedlineCitationSet PUBLIC "-//NLM//DTD Medline Citation, 1st January, 2014//EN"
+									"http://www.nlm.nih.gov/databases/dtd/nlmmedlinecitationset_140101.dtd">
+<MedlineCitationSet>
+	<MedlineCitation Status="Publisher" Owner="NLM">
+		<PMID Version="1">25063949</PMID>
+		<DateCreated>
+			<Year>2014</Year>
+			<Month>7</Month>
+			<Day>26</Day>
+		</DateCreated>
+		<Article PubModel="Print-Electronic">
+			<Journal>
+				<ISSN IssnType="Electronic">1879-1484</ISSN>
+				<JournalIssue CitedMedium="Internet">
+					<Volume>236</Volume>
+					<Issue>1</Issue>
+					<PubDate>
+						<Year>2014</Year>
+						<Month>Jul</Month>
+						<Day>15</Day>
+					</PubDate>
+				</JournalIssue>
+				<Title>Atherosclerosis</Title>
+				<ISOAbbreviation>Atherosclerosis</ISOAbbreviation>
+			</Journal>
+			<ArticleTitle>Plasma total homocysteine and carotid intima-media thickness in type 1 diabetes: A prospective study.</ArticleTitle>
+			<Pagination>
+				<MedlinePgn>188-195</MedlinePgn>
+			</Pagination>
+			<ELocationID EIdType="pii">S0021-9150(14)01276-3</ELocationID>
+			<ELocationID EIdType="doi">10.1016/j.atherosclerosis.2014.07.001</ELocationID>
+			<Abstract>
+				<AbstractText Label="OBJECTIVE" NlmCategory="OBJECTIVE">Plasma total homocysteine (tHcy) has been positively associated with carotid intima-media thickness (IMT) in non-diabetic populations and in a few cross-sectional studies of diabetic patients. We investigated cross-sectional and prospective associations of a single measure of tHcy with common and internal carotid IMT over a 6-year period in type 1 diabetes.</AbstractText>
+				<AbstractText Label="RESEARCH DESIGN AND METHODS" NlmCategory="METHODS">tHcy levels were measured once, in plasma obtained in 1997-1999 from patients (n = 599) in the Epidemiology of Diabetes Interventions and Complications (EDIC) study, the observational follow-up of the Diabetes Control and Complications Trial (DCCT). Common and internal carotid IMT were determined twice, in EDIC &quot;Year 6&quot; (1998-2000) and &quot;Year 12&quot; (2004-2006), using B-mode ultra-sonography.</AbstractText>
+				<AbstractText Label="RESULTS" NlmCategory="RESULTS">After adjustment, plasma tHcy [median (interquartile range): 6.2 (5.1, 7.5) μmol/L] was significantly correlated with age, diastolic blood pressure, renal dysfunction, and smoking (all p &lt; 0.05). In an unadjusted model only, increasing quartiles of tHcy correlated with common and internal carotid IMT, again at both EDIC time-points (p &lt; 0.01). However, multivariate logistic regression revealed no significant associations between increasing quartiles of tHcy and the 6-year change in common and internal carotid IMT (highest vs. lowest quintile) when adjusted for conventional risk factors.</AbstractText>
+				<AbstractText Label="CONCLUSIONS" NlmCategory="CONCLUSIONS">In a type 1 diabetes cohort from the EDIC study, plasma tHcy measured in samples drawn in 1997-1999 was associated with measures of common and internal carotid IMT measured both one and seven years later, but not with IMT progression between the two time-points. The data do not support routine measurement of tHcy in people with Type 1 diabetes.</AbstractText>
+				<CopyrightInformation>Copyright © 2014 Elsevier Ireland Ltd. All rights reserved.</CopyrightInformation>
+			</Abstract>
+			<AuthorList>
+				<Author>
+					<LastName>Basu</LastName>
+					<ForeName>Arpita</ForeName>
+					<Initials>A</Initials>
+					<Affiliation>Department of Nutritional Sciences, Oklahoma State University, Stillwater, OK, USA.</Affiliation>
+				</Author>
+				<Author>
+					<LastName>Jenkins</LastName>
+					<ForeName>Alicia J</ForeName>
+					<Initials>AJ</Initials>
+					<Affiliation>University of Sydney, NHMRC Clinical Trials Centre, Camperdown, Sydney, NSW, Australia; Centre for Experimental Medicine, Queen's University of Belfast, N. Ireland, UK.</Affiliation>
+				</Author>
+				<Author>
+					<LastName>Stoner</LastName>
+					<ForeName>Julie A</ForeName>
+					<Initials>JA</Initials>
+					<Affiliation>Department of Biostatistics and Epidemiology, University of Oklahoma Health Sciences Center, Oklahoma City, OK, USA.</Affiliation>
+				</Author>
+				<Author>
+					<LastName>Thorpe</LastName>
+					<ForeName>Suzanne R</ForeName>
+					<Initials>SR</Initials>
+					<Affiliation>Department of Chemistry and Biochemistry, University of South Carolina, Columbia, SC, USA.</Affiliation>
+				</Author>
+				<Author>
+					<LastName>Klein</LastName>
+					<ForeName>Richard L</ForeName>
+					<Initials>RL</Initials>
+					<Affiliation>Division of Endocrinology, Medical University of South Carolina, Charleston, SC, USA; The Ralph H Johnson Veterans Affairs Medical Center, Charleston, SC, USA.</Affiliation>
+				</Author>
+				<Author>
+					<LastName>Lopes-Virella</LastName>
+					<ForeName>Maria F</ForeName>
+					<Initials>MF</Initials>
+					<Affiliation>Division of Endocrinology, Medical University of South Carolina, Charleston, SC, USA; The Ralph H Johnson Veterans Affairs Medical Center, Charleston, SC, USA.</Affiliation>
+				</Author>
+				<Author>
+					<LastName>Garvey</LastName>
+					<ForeName>W Timothy</ForeName>
+					<Initials>WT</Initials>
+					<Affiliation>Department of Nutrition Sciences, University of Alabama at Birmingham, Birmingham, AL, USA.</Affiliation>
+				</Author>
+				<Author>
+					<LastName>Lyons</LastName>
+					<ForeName>Timothy J</ForeName>
+					<Initials>TJ</Initials>
+					<Affiliation>Centre for Experimental Medicine, Queen's University of Belfast, N. Ireland, UK; Section of Endocrinology, University of Oklahoma Health Sciences Center, Oklahoma City, OK, USA. Electronic address: t.lyons@qub.ac.uk.</Affiliation>
+				</Author>
+				<Author>
+					<CollectiveName>The DCCT/EDIC Research Group</CollectiveName>
+				</Author>
+			</AuthorList>
+			<Language>ENG</Language>
+			<PublicationTypeList>
+				<PublicationType>JOURNAL ARTICLE</PublicationType>
+			</PublicationTypeList>
+			<ArticleDate DateType="Electronic">
+				<Year>2014</Year>
+				<Month>7</Month>
+				<Day>15</Day>
+			</ArticleDate>
+		</Article>
+		<MedlineJournalInfo>
+			<MedlineTA>Atherosclerosis</MedlineTA>
+			<NlmUniqueID>0242543</NlmUniqueID>
+			<ISSNLinking>0021-9150</ISSNLinking>
+		</MedlineJournalInfo>
+		<KeywordList Owner="NOTNLM">
+			<Keyword MajorTopicYN="N">homocysteine</Keyword>
+			<Keyword MajorTopicYN="N">intima-media thickness</Keyword>
+			<Keyword MajorTopicYN="N">type 1 diabetes</Keyword>
+		</KeywordList>
+	</MedlineCitation>
+	<!--<MedlineCitation Owner="NLM" Status="PubMed-not-MEDLINE">
+		<PMID Version="1">16691646</PMID>
+		<DateCreated>
+			<Year>2006</Year>
+			<Month>06</Month>
+			<Day>01</Day>
+		</DateCreated>
+		<DateCompleted>
+			<Year>2006</Year>
+			<Month>06</Month>
+			<Day>01</Day>
+		</DateCompleted>
+		<DateRevised>
+			<Year>2008</Year>
+			<Month>11</Month>
+			<Day>20</Day>
+		</DateRevised>
+		<Article PubModel="Print">
+			<Journal>
+				<ISSN IssnType="Print">0065-9533</ISSN>
+				<JournalIssue CitedMedium="Print">
+					<Volume>1</Volume>
+					<Issue>2</Issue>
+					<PubDate>
+						<Year>1865</Year>
+					</PubDate>
+				</JournalIssue>
+				<Title>Transactions of the American Ophthalmological Society</Title>
+				<ISOAbbreviation>Trans Am Ophthalmol Soc</ISOAbbreviation>
+			</Journal>
+			<ArticleTitle>Statement of Cases of Gonorrhoeal and Purulent Ophthalmia treated in the Desmarres (U. S. Army) Eye and Ear Hospital, Chicago, Illinois, with Special Report of Treatment Employed.</ArticleTitle>
+			<Pagination>
+				<MedlinePgn>12-28</MedlinePgn>
+			</Pagination>
+			<AuthorList CompleteYN="Y">
+				<Author ValidYN="Y">
+					<LastName>Hildreth</LastName>
+					<ForeName>J S</ForeName>
+					<Initials>JS</Initials>
+				</Author>
+			</AuthorList>
+			<Language>eng</Language>
+			<PublicationTypeList>
+				<PublicationType>Journal Article</PublicationType>
+			</PublicationTypeList>
+		</Article>
+		<MedlineJournalInfo>
+			<Country>United States</Country>
+			<MedlineTA>Trans Am Ophthalmol Soc</MedlineTA>
+			<NlmUniqueID>7506106</NlmUniqueID>
+			<ISSNLinking>0065-9533</ISSNLinking>
+		</MedlineJournalInfo>
+		<OtherID Source="NLM">PMC1361495</OtherID>
+	</MedlineCitation>
+	<MedlineCitation Owner="NLM" Status="PubMed-not-MEDLINE">
+		<PMID Version="1">16691647</PMID>
+		<DateCreated>
+			<Year>2006</Year>
+			<Month>06</Month>
+			<Day>01</Day>
+		</DateCreated>
+		<DateCompleted>
+			<Year>2006</Year>
+			<Month>06</Month>
+			<Day>01</Day>
+		</DateCompleted>
+		<DateRevised>
+			<Year>2008</Year>
+			<Month>11</Month>
+			<Day>20</Day>
+		</DateRevised>
+		<Article PubModel="Print">
+			<Journal>
+				<ISSN IssnType="Print">0065-9533</ISSN>
+				<JournalIssue CitedMedium="Print">
+					<Volume>1</Volume>
+					<Issue>2</Issue>
+					<PubDate>
+						<Year>1865</Year>
+					</PubDate>
+				</JournalIssue>
+				<Title>Transactions of the American Ophthalmological Society</Title>
+				<ISOAbbreviation>Trans Am Ophthalmol Soc</ISOAbbreviation>
+			</Journal>
+			<ArticleTitle>Report on the Progress of Ophthalmology during the past year.</ArticleTitle>
+			<Pagination>
+				<MedlinePgn>2-12</MedlinePgn>
+			</Pagination>
+			<AuthorList CompleteYN="Y">
+				<Author ValidYN="Y">
+					<LastName>Jeffries</LastName>
+					<ForeName>B J</ForeName>
+					<Initials>BJ</Initials>
+				</Author>
+			</AuthorList>
+			<Language>eng</Language>
+			<PublicationTypeList>
+				<PublicationType>Journal Article</PublicationType>
+			</PublicationTypeList>
+		</Article>
+		<MedlineJournalInfo>
+			<Country>United States</Country>
+			<MedlineTA>Trans Am Ophthalmol Soc</MedlineTA>
+			<NlmUniqueID>7506106</NlmUniqueID>
+			<ISSNLinking>0065-9533</ISSNLinking>
+		</MedlineJournalInfo>
+		<OtherID Source="NLM">PMC1361494</OtherID>
+	</MedlineCitation>-->
+</MedlineCitationSet>
