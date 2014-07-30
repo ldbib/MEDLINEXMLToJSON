@@ -25,10 +25,11 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 	var fs 			= require("fs"),
 		sax 		= require("sax");
 
-
-	var parser = sax.createStream(true, { // Param 1 set to true for XML parsing
-		trim: true,
-		normalize: true
+	// We use the steam functionality of sax since the MEDLINE files tend to be quite large and to load a 100MB large XML file 
+	// into memory is a bad idea when Node.js can process it on the go saving memory.
+	var parser = sax.createStream(true, { // true means XML parsing
+		trim: true, // Trims text and comment nodes
+		normalize: true // Turnes any whitespace into a single space
 	});
 
 	var json 	= new Array(),
@@ -60,8 +61,6 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 					"DateCreated": 	{
 						"Year"
 					}
-
-
 				}*/
 				json[index] = {
 					"owner": 	nodeData.attributes.Owner,
@@ -285,23 +284,23 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 			"_default": function(text) { console.log(text); }
 		};
 
-	parser.on("opentag", function(nodeData) {
+	parser.on("opentag", function(nodeData) { // Runs when an XML tag is opened. The nodeData variable contains the name of the tag and it's attributes.
 		whereAmI.push(nodeData.name);
 		whereIndex++;
 		nodeParser[nodeData.name] ? nodeParser[nodeData.name](nodeData) : nodeParser._default(nodeData);
 	});
-	parser.on("closetag", function(nodeName) {
+	parser.on("closetag", function(nodeName) { // Runs when an XML tag is closed.
 		whereAmI.pop();
 		whereIndex--;
 	});
-	parser.on("text", function(text) {
+	parser.on("text", function(text) { // Runs when there is text in an XML tag, not an attribute.
 		textParser[whereAmI[whereIndex]] ? textParser[whereAmI[whereIndex]](text) : textParser._default(text);
 	});
-	parser.on("end", function(text) {
+	parser.on("end", function(text) { // Runs when all the XML processing is done.
 		console.log("\nEND JSON:\n");
-		console.log(JSON.stringify(json));
+		console.log(JSON.stringify(json)); // Output to JSON in the console.
 	});
 
-	fs.createReadStream('./example.xml').pipe(parser);
+	fs.createReadStream('./example.xml').pipe(parser); // Pipes the readstream of example.xml to the XML parser.
 
 }());
