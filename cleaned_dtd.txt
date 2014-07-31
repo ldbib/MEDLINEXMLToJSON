@@ -1,72 +1,72 @@
 MedlineCitationSet (MedlineCitation*, DeleteCitation?)
 MedlineCitation (PMID, DateCreated, DateCompleted?, DateRevised?, Article, MedlineJournalInfo, ChemicalList?,SupplMeshList?, CitationSubset*, CommentsCorrectionsList?, GeneSymbolList?, MeshHeadingList?,NumberOfReferences?, PersonalNameSubjectList?, OtherID*, OtherAbstract*, KeywordList*, SpaceFlightMission*, InvestigatorList?, GeneralNote*)
-    Owner  (NLM | NASA | PIP | KIE | HSR | HMD | NOTNLM) "NLM" || Status (Completed | In-Process | PubMed-not-MEDLINE | In-Data-Review | Publisher | MEDLINE | OLDMEDLINE) #REQUIRED || VersionID CDATA #IMPLIED || VersionDate CDATA #IMPLIED
+	Owner  (NLM | NASA | PIP | KIE | HSR | HMD | NOTNLM) "NLM" || Status (Completed | In-Process | PubMed-not-MEDLINE | In-Data-Review | Publisher | MEDLINE | OLDMEDLINE) #REQUIRED || VersionID CDATA #IMPLIED || VersionDate CDATA #IMPLIED
 Abstract (AbstractText+,CopyrightInformation?)
 AbstractText (#PCDATA)
-    Label CDATA #IMPLIED || NlmCategory (UNLABELLED | BACKGROUND | OBJECTIVE | METHODS | RESULTS | CONCLUSIONS | UNASSIGNED) #IMPLIED
+	Label CDATA #IMPLIED || NlmCategory (UNLABELLED | BACKGROUND | OBJECTIVE | METHODS | RESULTS | CONCLUSIONS | UNASSIGNED) #IMPLIED
 AccessionNumber (#PCDATA)
 AccessionNumberList (AccessionNumber+)
 Acronym (#PCDATA)
 Affiliation (#PCDATA)
 Agency (#PCDATA)
 Article (Journal,ArticleTitle,((Pagination, ELocationID*) | ELocationID+),Abstract?,AuthorList?, Language+, DataBankList?, GrantList?,PublicationTypeList, VernacularTitle?, ArticleDate*)>
-    PubModel (Print | Print-Electronic | Electronic | Electronic-Print | Electronic-eCollection) #REQUIRED
+	PubModel (Print | Print-Electronic | Electronic | Electronic-Print | Electronic-eCollection) #REQUIRED
 ArticleDate (Year,Month,Day)
-    DateType CDATA  #FIXED "Electronic"
+	DateType CDATA  #FIXED "Electronic"
 ArticleTitle (#PCDATA)
 Author (((LastName, ForeName?, Initials?, Suffix?) | CollectiveName),Identifier*,Affiliation?)
-    ValidYN (Y | N) "Y"
+	ValidYN (Y | N) "Y"
 AuthorList (Author+)
-    CompleteYN (Y | N) "Y"
+	CompleteYN (Y | N) "Y"
 Chemical (RegistryNumber,NameOfSubstance)
 ChemicalList (Chemical+)
 CitationSubset (#PCDATA)
 CollectiveName (#PCDATA)
 CommentsCorrections (RefSource,PMID?,Note?)
-    RefType (CommentOn | CommentIn | ErratumIn | ErratumFor | PartialRetractionIn | PartialRetractionOf | RepublishedFrom | RepublishedIn | RetractionOf | RetractionIn | UpdateIn | UpdateOf | SummaryForPatientsIn | OriginalReportIn | ReprintOf | ReprintIn | Cites) #REQUIRED
+	RefType (CommentOn | CommentIn | ErratumIn | ErratumFor | PartialRetractionIn | PartialRetractionOf | RepublishedFrom | RepublishedIn | RetractionOf | RetractionIn | UpdateIn | UpdateOf | SummaryForPatientsIn | OriginalReportIn | ReprintOf | ReprintIn | Cites) #REQUIRED
 CommentsCorrectionsList (CommentsCorrections+)
 CopyrightInformation (#PCDATA)
 Country (#PCDATA)
 DataBank (DataBankName, AccessionNumberList?)
 DataBankList (DataBank+)
-    CompleteYN (Y | N) "Y"
+	CompleteYN (Y | N) "Y"
 DataBankName (#PCDATA)
 DateCompleted (Year,Month,Day)
 DateCreated (Year,Month,Day)
 DateRevised (Year,Month,Day)
 Day (#PCDATA)
 DescriptorName (#PCDATA)
-    MajorTopicYN (Y | N) "N" Type (Geographic) #IMPLIED
+	MajorTopicYN (Y | N) "N" Type (Geographic) #IMPLIED
 ELocationID (#PCDATA)
-    EIdType (doi | pii) #REQUIRED || ValidYN  (Y | N) "Y"
+	EIdType (doi | pii) #REQUIRED || ValidYN  (Y | N) "Y"
 EndPage (#PCDATA)
 ForeName (#PCDATA)
 GeneSymbol (#PCDATA)
 GeneSymbolList (GeneSymbol+)
 GeneralNote (#PCDATA)
-    Owner (NLM | NASA | PIP | KIE | HSR | HMD) "NLM"
+	Owner (NLM | NASA | PIP | KIE | HSR | HMD) "NLM"
 Grant (GrantID?, Acronym?, Agency, Country)
 GrantID (#PCDATA)
 GrantList (Grant+)
-    CompleteYN (Y | N) "Y"
+	CompleteYN (Y | N) "Y"
 Identifier (#PCDATA)
-    Source CDATA #REQUIRED
+	Source CDATA #REQUIRED
 ISOAbbreviation (#PCDATA)
 ISSN (#PCDATA)
-    IssnType  (Electronic | Print) #REQUIRED
+	IssnType  (Electronic | Print) #REQUIRED
 ISSNLinking (#PCDATA)
 Initials (#PCDATA)
 Investigator (LastName,ForeName?, Initials?,Suffix?,Identifier*,Affiliation?)
-    Investigator ValidYN (Y | N) "Y"
+	Investigator ValidYN (Y | N) "Y"
 InvestigatorList (Investigator+)
 Issue (#PCDATA)
 Journal (ISSN?, JournalIssue, Title?, ISOAbbreviation?)
 JournalIssue (Volume?, Issue?, PubDate)
-    CitedMedium (Internet | Print) #REQUIRED
+	CitedMedium (Internet | Print) #REQUIRED
 Keyword (#PCDATA)
-    MajorTopicYN (Y | N) "N"
+	MajorTopicYN (Y | N) "N"
 KeywordList (Keyword+)
-    Owner (NLM | NLM-AUTO | NASA | PIP | KIE | NOTNLM | HHS) "NLM"
+	Owner (NLM | NLM-AUTO | NASA | PIP | KIE | NOTNLM | HHS) "NLM"
 Language (#PCDATA)
 LastName (#PCDATA)
 MedlineDate (#PCDATA)
@@ -81,11 +81,11 @@ NlmUniqueID (#PCDATA)
 Note (#PCDATA)
 NumberOfReferences (#PCDATA)
 OtherAbstract (AbstractText+,CopyrightInformation?)
-    Type (AAMC | AIDS | KIE | PIP | NASA | Publisher) #REQUIRED || Language CDATA "eng"
+	Type (AAMC | AIDS | KIE | PIP | NASA | Publisher) #REQUIRED || Language CDATA "eng"
 OtherID (#PCDATA)
-    Source (NASA | KIE | PIP | POP | ARPL | CPC | IND | CPFH | CLML | NRCBL | NLM) #REQUIRED
+	Source (NASA | KIE | PIP | POP | ARPL | CPC | IND | CPFH | CLML | NRCBL | NLM) #REQUIRED
 PMID (#PCDATA)
-    Version CDATA #REQUIRED
+	Version CDATA #REQUIRED
 Pagination ((StartPage, EndPage?, MedlinePgn?) | MedlinePgn)
 PersonalNameSubject (LastName,ForeName?, Initials?,Suffix?)
 PersonalNameSubjectList (PersonalNameSubject+)
@@ -93,7 +93,7 @@ PubDate ((Year, ((Month, Day?) | Season)?) | MedlineDate)
 PublicationType (#PCDATA)
 PublicationTypeList (PublicationType+)
 QualifierName (#PCDATA)
-    MajorTopicYN (Y | N) "N"
+	MajorTopicYN (Y | N) "N"
 RefSource (#PCDATA)
 RegistryNumber (#PCDATA)
 Season (#PCDATA)
@@ -102,7 +102,7 @@ StartPage (#PCDATA)
 Suffix (#PCDATA)
 SupplMeshList (SupplMeshName+)
 SupplMeshName (#PCDATA)
-    Type (Disease | Protocol) #REQUIRED
+	Type (Disease | Protocol) #REQUIRED
 Title (#PCDATA)
 VernacularTitle (#PCDATA)
 Volume (#PCDATA)
