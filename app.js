@@ -87,15 +87,9 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 			"DateRevised": function(text) { lastDateTag = "revised"; json[json.length-1].dates.revised = {} },
 			"PubDate": function(text) { lastDateTag = "pubdate"; },
 			"ArticleDate": function(text) { lastDateTag = "articledate"; json[json.length-1].articledate = {} },
-			"Year": function(text) {
-				dateInsertion(text, "year");
-			},
-			"Month": function(text) {
-				dateInsertion(text, "month");
-			},
-			"Day": function(text) {
-				dateInsertion(text, "day");
-			},
+			"Year": function(text) { dateInsertion(text, "year"); },
+			"Month": function(text) { dateInsertion(text, "month"); },
+			"Day": function(text) { dateInsertion(text, "day"); },
 			"Article": function(text) { json[json.length-1].pubmodel = nodeData.attributes.PubModel; },
 			"Volume": function(text) { json[json.length-1].journal.volume = text; },
 			"Issue": function(text) { json[json.length-1].journal.issue = text; },
@@ -140,73 +134,19 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 			"ISSN": function(text) { json[json.length-1].journal[(nodeData.attributes.IssnType === "Electronic" ? "eissn" : "issn")] = text; },
 			"Title": function(text) { json[json.length-1].journal.title = text; }, // Journal Title
 			"ISOAbbreviation": function(text) { json[json.length-1].journal.isoAbbreviation = text; },
-			"AuthorList": function(text) {
-				json[json.length-1].authors = new Array();
-			},
-			"Author": function(text) {
-				json[json.length-1].authors.push({});
-			},
-			"LastName": function(text) {
-				if(whereAmI[whereAmI.length-2] === "Author") {
-					json[json.length-1].authors[json[json.length-1].authors.length-1].lastName = text;
-				} else {
-					console.log("TODO!!");
-				}
-			},
-			"ForeName": function(text) {
-				if(whereAmI[whereAmI.length-2] === "Author") {
-					json[json.length-1].authors[json[json.length-1].authors.length-1].firstName = text;
-				} else {
-					console.log("TODO!!");
-				}
-			},
-			"Initials": function(text) {
-				if(whereAmI[whereAmI.length-2] === "Author") {
-					json[json.length-1].authors[json[json.length-1].authors.length-1].initials = text;
-				} else {
-					console.log("TODO!!");
-				}
-			},
-			"Suffix": function(text) {
-				if(whereAmI[whereAmI.length-2] === "Author") {
-					json[json.length-1].authors[json[json.length-1].authors.length-1].suffix = text;
-				} else {
-					console.log("TODO!!");
-				}
-			},
-			"CollectiveName": function(text) {
-				if(whereAmI[whereAmI.length-2] === "Author") {
-					json[json.length-1].authors[json[json.length-1].authors.length-1].collectiveName = text;
-				} else {
-					console.log("TODO!!");
-				}
-			},
-			"Identifier": function(text) {
-				if(whereAmI[whereAmI.length-2] === "Author") {
-					json[json.length-1].authors[json[json.length-1].authors.length-1].identifier = text;
-				} else {
-					console.log("TODO!!");
-				}
-			},
-			"Affiliation": function(text) {
-				if(whereAmI[whereAmI.length-2] === "Author") {
-					json[json.length-1].authors[json[json.length-1].authors.length-1].affiliation = text;
-				} else {
-					console.log("TODO!!");
-				}
-			},
-			"PublicationType": function(text) {
-				json[json.length-1].pubtype.push(text);
-			},
-			"MedlineTA": function(text) {
-				json[json.length-1].medlineAbbreviation = text;
-			},
-			"NlmUniqueID": function(text) {
-				json[json.length-1].nlmid = text;
-			},
-			"ISSNLinking": function(text) {
-				json[json.length-1].journal.lissn = text;
-			},
+			"AuthorList": function(text) { json[json.length-1].authors = new Array(); },
+			"Author": function(text) { json[json.length-1].authors.push({}); },
+			"LastName": function(text) { personInsertion(text, "lastName"); },
+			"ForeName": function(text) { personInsertion(text, "firstName"); },
+			"Initials": function(text) { personInsertion(text, "initials"); },
+			"Suffix": function(text) { personInsertion(text, "suffix"); },
+			"CollectiveName": function(text) { personInsertion(text, "collectiveName"); },
+			"Identifier": function(text) { personInsertion(text, "identifier"); },
+			"Affiliation": function(text) { personInsertion(text, "affiliation"); },
+			"PublicationType": function(text) { json[json.length-1].pubtype.push(text); },
+			"MedlineTA": function(text) { json[json.length-1].medlineAbbreviation = text; },
+			"NlmUniqueID": function(text) { json[json.length-1].nlmid = text; },
+			"ISSNLinking": function(text) { json[json.length-1].journal.lissn = text; },
 			"KeywordList": function(text) {
 				if(typeof json[json.length-1].keywordList !== "object") {
 					json[json.length-1].keywordList = new Array( { "owner": nodeData.attributes.Owner, "list": new Array() } );
@@ -255,6 +195,14 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 			json[json.length-1].journal.pubdate[type] = text;
 		} else if(lastDateTag === "articledate") {
 			json[json.length-1].articledate[type] = text;
+		}
+	}
+
+	function personInsertion(text, type) {
+		if(whereAmI[whereAmI.length-2] === "Author") {
+			json[json.length-1].authors[json[json.length-1].authors.length-1][type] = text;
+		} else {
+			console.log("TODO!!");
 		}
 	}
 
