@@ -69,7 +69,6 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 					},
 					"language": [],
 					"pubtype": [],
-					"country": null,
 					"medlineAbbreviation": null
 				});
 			},
@@ -86,15 +85,18 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 			"DateCompleted": function(text) { lastDateTag = "completed"; json[json.length-1].dates.completed = {} },
 			"DateRevised": function(text) { lastDateTag = "revised"; json[json.length-1].dates.revised = {} },
 			"PubDate": function(text) { lastDateTag = "pubdate"; },
-			"ArticleDate": function(text) { lastDateTag = "articledate"; json[json.length-1].articledate = {} },
+			"ArticleDate": function(text) { lastDateTag = "articleDate"; json[json.length-1].articledate = {} },
 			"Year": function(text) { dateInsertion(text, "year"); },
 			"Month": function(text) { dateInsertion(text, "month"); },
 			"Day": function(text) { dateInsertion(text, "day"); },
+			"Season": function(text) { dateInsertion(text, "season"); },
+			"MedlineDate": function(text) { dateInsertion(text, "medlineDate"); },
 			"Article": function(text) { json[json.length-1].pubmodel = nodeData.attributes.PubModel; },
 			"Volume": function(text) { json[json.length-1].journal.volume = text; },
 			"Issue": function(text) { json[json.length-1].journal.issue = text; },
 			"ArticleTitle": function(text) { json[json.length-1].article = text; },
-			"MedlinePgn": function(text) {
+			"VernacularTitle": function(text) { json[json.length-1].vernacularTitle = text; },
+			"MedlinePgn": function(text) { // Split it up into first page and last page
 				text = text.split("-");
 				json[json.length-1].pagnation.fp = text[0];
 				if(text[1]) {
@@ -109,26 +111,52 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 					json[json.length-1].pagnation.elocation.push( { "type": nodeData.attributes.EIdType, "value": text } );
 				}
 			},
+			"Abstract": function(text) { json[json.length-1].abstract = {}; },
+			"OtherAbstract": function(text) {
+				if(typeof json[json.length-1].otherAbstracts !== "object") {
+					json[json.length-1].otherAbstracts = new Array( { "type": nodeData.attributes.Type, "language": nodeData.attributes.Language } );
+				} else {
+					json[json.length-1].otherAbstracts.push( { "type": nodeData.attributes.Type, "language": nodeData.attributes.Language }) ;
+				}
+			},
 			"AbstractText": function(text) {
-				if(whereAmI[whereAmI.length-3] === "Article") {
-					if(typeof json[json.length-1].abstract !== "object") {
-						json[json.length-1].abstract = {};
-					}
+				if(whereAmI[whereAmI.length-2] === "Abstract") {
 					if(typeof json[json.length-1].abstract.abstracts !== "object") {
 						json[json.length-1].abstract.abstracts = new Array( { "text": text, "label": nodeData.attributes.Label, "nlmCategory": nodeData.attributes.NlmCategory } );
 					} else {
 						json[json.length-1].abstract.abstracts.push( { "text": text, "label": nodeData.attributes.Label, "nlmCategory": nodeData.attributes.NlmCategory } );
 					}
-				} else {
-					console.log("TODO!!!");
+				} else if(whereAmI[whereAmI.length-2] === "OtherAbstract") {
+					if(typeof json[json.length-1].otherAbstracts[json[json.length-1].otherAbstracts.length-1].abstracts !== "object") {
+						json[json.length-1].otherAbstracts[json[json.length-1].otherAbstracts.length-1].abstracts = new Array( { "text": text, "label": nodeData.attributes.Label, "nlmCategory": nodeData.attributes.NlmCategory } );
+					} else {
+						json[json.length-1].otherAbstracts[json[json.length-1].otherAbstracts.length-1].abstracts.push( { "text": text, "label": nodeData.attributes.Label, "nlmCategory": nodeData.attributes.NlmCategory } );
+					}
 				}
 			},
 			"CopyrightInformation": function(text) {
 				if(whereAmI[whereAmI.length-2] === "Abstract") {
 					json[json.length-1].abstract.copyright = text;
 				} else {
-					console.log("TODO!!!");
+					json[json.length-1].otherAbstracts[json[json.length-1].otherAbstracts.length-1].copyright = text;
 				}
+			},
+			"ChemicalList": function(text) { json[json.length-1].chemicals = new Array(); },
+			"Chemical": function(text) { json[json.length-1].chemicals.push({}); },
+			"RegistryNumber": function(text) { json[json.length-1].chemicals[json[json.length-1].chemicals.length-1].registryNumber = text; },
+			"NameOfSubstance": function(text) { json[json.length-1].chemicals[json[json.length-1].chemicals.length-1].nameOfSubstance = text; },
+			"GrantList": function(text) { json[json.length-1].grants = new Array(); },
+			"Grant": function(text) { json[json.length-1].grants.push({}); },
+			"GrantID": function(text) { json[json.length-1].grants[json[json.length-1].grants.length-1].grantID = text; },
+			"Acronym": function(text) { json[json.length-1].grants[json[json.length-1].grants.length-1].acronym = text; },
+			"Agency": function(text) { json[json.length-1].grants[json[json.length-1].grants.length-1].agency = text; },
+			"Country": function(text) {
+				if(whereAmI[whereAmI.length-2] === "MedlineJournalInfo") {
+					json[json.length-1].country = text;
+				} else if(whereAmI[whereAmI.length-2] === "Grant") {
+					json[json.length-1].grants[json[json.length-1].grants.length-1].country = text;
+				}
+				
 			},
 			"Language": function(text) { json[json.length-1].language.push(text); },
 			"ISSN": function(text) { json[json.length-1].journal[(nodeData.attributes.IssnType === "Electronic" ? "eissn" : "issn")] = text; },
@@ -145,7 +173,14 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 			"Affiliation": function(text) { personInsertion(text, "affiliation"); },
 			"PublicationType": function(text) { json[json.length-1].pubtype.push(text); },
 			"MedlineTA": function(text) { json[json.length-1].medlineAbbreviation = text; },
-			"NlmUniqueID": function(text) { json[json.length-1].nlmid = text; },
+			"NlmUniqueID": function(text) { json[json.length-1].nlmID = text; },
+			"OtherID": function(text) {
+				if(typeof json[json.length-1].otherID !== "object") {
+					json[json.length-1].otherID = new Array({"source": nodeData.attributes.Source, "text": text});
+				} else {
+					json[json.length-1].otherID.push({"source": nodeData.attributes.Source, "text": text});
+				}
+			},
 			"ISSNLinking": function(text) { json[json.length-1].journal.lissn = text; },
 			"KeywordList": function(text) {
 				if(typeof json[json.length-1].keywordList !== "object") {
