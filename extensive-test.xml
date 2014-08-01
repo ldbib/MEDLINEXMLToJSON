@@ -1,0 +1,235 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE MedlineCitationSet PUBLIC "-//NLM//DTD Medline Citation, 1st January, 2014//EN"
+									"http://www.nlm.nih.gov/databases/dtd/nlmmedlinecitationset_140101.dtd">
+<MedlineCitationSet>
+	<MedlineCitation Status="Publisher" Owner="NLM" VersionID="IMPLIED" VersionDate="IMPLIED">
+		<PMID Version="1">25063949</PMID>
+		<DateCreated>
+			<Year>2014</Year>
+			<Month>7</Month>
+			<Day>26</Day>
+		</DateCreated>
+		<DateCompleted>
+			<Year>2014</Year>
+			<Month>7</Month>
+			<Day>27</Day>
+		</DateCompleted>
+		<DateRevised>
+			<Year>2014</Year>
+			<Month>7</Month>
+			<Day>28</Day>
+		</DateRevised>
+		<Article PubModel="Print-Electronic">
+			<Journal>
+				<ISSN IssnType="Electronic">1234-5678</ISSN>
+				<JournalIssue CitedMedium="Internet">
+					<Volume>555</Volume>
+					<Issue>5</Issue>
+					<PubDate>
+						<Year>2014</Year>
+						<Month>Jul</Month>
+						<Day>15</Day>
+						<!--
+						<Season>Spring</Season>
+						<MedlineDate>MedlineDate</MedlineDate>
+						-->
+					</PubDate>
+				</JournalIssue>
+				<Title>The title of the association of the Journal</Title>
+				<ISOAbbreviation>Journal Abbreviation</ISOAbbreviation>
+			</Journal>
+			<ArticleTitle>Article title</ArticleTitle>
+			<VernacularTitle>Vernacular Title</VernacularTitle>
+			<Pagination>
+				<!--
+				<StartPage>StartPage</StartPage>
+				<EndPage>EndPage</EndPage>
+				-->
+				<MedlinePgn>188-195</MedlinePgn>
+			</Pagination>
+			<ELocationID EIdType="pii">Some PII</ELocationID>
+			<ELocationID EIdType="doi">Some DOI</ELocationID>
+			<Abstract>
+				<AbstractText Label="OBJECTIVE" NlmCategory="OBJECTIVE">Objective of the abstract!</AbstractText>
+				<AbstractText Label="RESEARCH DESIGN AND METHODS" NlmCategory="METHODS">Methods of the abstract!</AbstractText>
+				<AbstractText Label="RESULTS" NlmCategory="RESULTS">Results of the abstract!</AbstractText>
+				<AbstractText Label="CONCLUSIONS" NlmCategory="CONCLUSIONS">Conclusion of the abstract!</AbstractText>
+				<CopyrightInformation>Copyright Information... Why not Public Domain or Creative Commons?</CopyrightInformation>
+			</Abstract>
+			<AuthorList>
+				<Author>
+					<LastName>Author Last Name</LastName>
+					<ForeName>Author First Name</ForeName>
+					<Initials>Author Initials</Initials>
+					<Suffix>Author Suffix</Suffix>
+					<Identifier Source="Some random Identifier Author Source 1">Author Identifier 1</Identifier>
+					<Affiliation PubModel="Print">Author Affiliation 1</Affiliation>
+				</Author>
+				<Author>
+					<CollectiveName RefType="ErratumFor">Author Collective Name</CollectiveName>
+					<Identifier Source="Some random Identifier Author Source 2">Author Identifier 2</Identifier>
+					<Affiliation PubModel="Print">Author Affiliation 2</Affiliation>
+				</Author>
+			</AuthorList>
+			<Language>ENG</Language>
+			<DataBankList CompleteYN="Y">
+				<DataBank>
+					<DataBankName>DataBankNameText1</DataBankName>
+					<AccessionNumberList>
+						<AccessionNumber>AccessionNumberText11</AccessionNumber>
+						<AccessionNumber>AccessionNumberText12</AccessionNumber>
+					</AccessionNumberList>
+				</DataBank>
+				<DataBank>
+					<DataBankName>DataBankNameText2</DataBankName>
+					<AccessionNumberList>
+						<AccessionNumber>AccessionNumberText21</AccessionNumber>
+						<AccessionNumber>AccessionNumberText22</AccessionNumber>
+					</AccessionNumberList>
+				</DataBank>
+			</DataBankList>
+			<GrantList CompleteYN="Y">
+				<Grant>
+					<GrantID>GrantIDText</GrantID>
+					<Acronym>AcronymText</Acronym>
+					<Agency>AgencyText</Agency>
+					<Country>CountryText</Country>
+				</Grant>
+				<Grant>
+					<GrantID>GrantIDText2</GrantID>
+					<Acronym>AcronymText2</Acronym>
+					<Agency>AgencyText2</Agency>
+					<Country>CountryText2</Country>
+				</Grant>
+			</GrantList>
+			<PublicationTypeList>
+				<PublicationType>JOURNAL ARTICLE</PublicationType>
+				<PublicationType>Not a JOURNAL ARTICLE</PublicationType>
+			</PublicationTypeList>
+			<ArticleDate DateType="Electronic">
+				<Year>2014</Year>
+				<Month>7</Month>
+				<Day>15</Day>
+			</ArticleDate>
+			<ArticleDate DateType="Other Example">
+				<Year>2014</Year>
+				<Month>7</Month>
+				<Day>16</Day>
+			</ArticleDate>
+		</Article>
+		<MedlineJournalInfo>
+			<Country>Medline Journal Country</Country>
+			<MedlineTA>Medlines Abbreviation</MedlineTA>
+			<NlmUniqueID>NLM's unique ID</NlmUniqueID>
+			<ISSNLinking>9876-5432</ISSNLinking>
+		</MedlineJournalInfo>
+		<KeywordList Owner="NOTNLM">
+			<Keyword MajorTopicYN="Y">Keyword NOT NLM 1</Keyword>
+			<Keyword MajorTopicYN="N">Keyword NOT NLM 2</Keyword>
+			<Keyword MajorTopicYN="N">Keyword NOT NLM 3</Keyword>
+		</KeywordList>
+		<KeywordList Owner="NLM">
+			<Keyword MajorTopicYN="Y">Keyword NLM 1</Keyword>
+			<Keyword MajorTopicYN="N">Keyword NLM 2</Keyword>
+			<Keyword MajorTopicYN="N">Keyword NLM 3</Keyword>
+		</KeywordList>
+		<ChemicalList>
+			<Chemical>
+				<RegistryNumber>Chemical Registry Number 1</RegistryNumber>
+				<NameOfSubstance>Chemical Name of Substance 1</NameOfSubstance>
+			</Chemical>
+			<Chemical>
+				<RegistryNumber>Chemical Registry Number 2</RegistryNumber>
+				<NameOfSubstance>Chemical Name of Substance 2</NameOfSubstance>
+			</Chemical>
+		</ChemicalList>
+		<SupplMeshList>
+			<SupplMeshName Type="Disease">Supplemental? Mesh Name 1</SupplMeshName>
+			<SupplMeshName Type="Disease">Supplemental? Mesh Name 2</SupplMeshName>
+			<SupplMeshName Type="Protocol">Supplemental? Mesh Name 3</SupplMeshName>
+		</SupplMeshList>
+		<CitationSubset>Citation Subset text 1</CitationSubset>
+		<CitationSubset>Citation Subset text 2</CitationSubset>
+		<CommentsCorrectionsList>
+			<CommentsCorrections>
+				<RefSource>Reference source 1</RefSource>
+				<PMID Version="1">PMID of correction 1</PMID>
+				<Note>Note of correction 1</Note>
+			</CommentsCorrections>
+			<CommentsCorrections>
+				<RefSource>Reference source 2</RefSource>
+				<PMID Version="1">PMID of correction 2</PMID>
+				<Note>Note of correction 2</Note>
+			</CommentsCorrections>
+		</CommentsCorrectionsList>
+		<GeneSymbolList>
+			<GeneSymbol>Gene Symbol 1</GeneSymbol>
+			<GeneSymbol>Gene Symbol 2</GeneSymbol>
+			<GeneSymbol>Gene Symbol 3</GeneSymbol>
+		</GeneSymbolList>
+		<MeshHeadingList>
+			<MeshHeading>
+				<DescriptorName MajorTopicYN="N" Type="Geographic something...">Mesh heading descriptor name 1</DescriptorName>
+				<QualifierName MajorTopicYN="N">Mesh heading qualifier name 1</QualifierName>
+			</MeshHeading>
+			<MeshHeading>
+				<DescriptorName MajorTopicYN="Y" Type="Geographic something...">Mesh heading descriptor name 2</DescriptorName>
+				<QualifierName MajorTopicYN="Y">Mesh heading qualifier name 2</QualifierName>
+			</MeshHeading>
+		</MeshHeadingList>
+		<NumberOfReferences>Number of references</NumberOfReferences>
+		<PersonalNameSubjectList>
+			<PersonalNameSubject>
+				<LastName>Personal Name Subject Last Name 1</LastName>
+				<ForeName>Personal Name Subject First Name 1</ForeName>
+				<Initials>Personal Name Subject Initials 1</Initials>
+				<Suffix>Personal Name Subject Suffix 1</Suffix>
+			</PersonalNameSubject>
+			<PersonalNameSubject>
+				<LastName>Personal Name Subject Last Name 2</LastName>
+				<ForeName>Personal Name Subject First Name 2</ForeName>
+				<Initials>Personal Name Subject Initials 2</Initials>
+				<Suffix>Personal Name Subject Suffix 2</Suffix>
+			</PersonalNameSubject>
+		</PersonalNameSubjectList>
+		<OtherID Source="NASA">Other ID 1</OtherID>
+		<OtherID Source="CPC">Other ID 2</OtherID>
+		<OtherID Source="NLM">Other ID 3</OtherID>
+		<OtherAbstract Type="AIDS" Language="ENG">
+			<AbstractText Label="OBJECTIVE" NlmCategory="OBJECTIVE">Objective of the OTHER abstract 1!</AbstractText>
+			<AbstractText Label="RESEARCH DESIGN AND METHODS" NlmCategory="METHODS">Methods of the OTHER abstract 1!</AbstractText>
+			<AbstractText Label="RESULTS" NlmCategory="RESULTS">Results of the OTHER abstract 1!</AbstractText>
+			<AbstractText Label="CONCLUSIONS" NlmCategory="CONCLUSIONS">Conclusion of the OTHER abstract 1!</AbstractText>
+			<CopyrightInformation>Copyright Information... Why not Public Domain or Creative Commons? 1</CopyrightInformation>
+		</OtherAbstract>
+		<OtherAbstract Type="Publisher" Language="ENG">
+			<AbstractText Label="OBJECTIVE" NlmCategory="OBJECTIVE">Objective of the OTHER abstract 2!</AbstractText>
+			<AbstractText Label="RESEARCH DESIGN AND METHODS" NlmCategory="METHODS">Methods of the OTHER abstract 2!</AbstractText>
+			<AbstractText Label="RESULTS" NlmCategory="RESULTS">Results of the OTHER abstract 2!</AbstractText>
+			<AbstractText Label="CONCLUSIONS" NlmCategory="CONCLUSIONS">Conclusion of the OTHER abstract 2!</AbstractText>
+			<CopyrightInformation>Copyright Information... Why not Public Domain or Creative Commons? 2</CopyrightInformation>
+		</OtherAbstract>
+		<SpaceFlightMission>TO SPACE AND BEYOND 1!</SpaceFlightMission>
+		<SpaceFlightMission>TO SPACE AND BEYOND 2!</SpaceFlightMission>
+		<InvestigatorList>
+			<Investigator ValidYN="N">
+				<LastName>Investigator Last Name 1</LastName>
+				<ForeName>Investigator First Name 1</ForeName>
+				<Initials>Investigator Initials 1</Initials>
+				<Suffix>Investigator Suffix 1</Suffix>
+				<Identifier Source="Some random Identifier Investigator Source 1">Investigator Identifier 1</Identifier>
+				<Affiliation PubModel="Print">Investigator Affiliation 1</Affiliation>
+			</Investigator>
+			<Investigator ValidYN="Y">
+				<LastName>Investigator Last Name 2</LastName>
+				<ForeName>Investigator First Name 2</ForeName>
+				<Initials>Investigator Initials 2</Initials>
+				<Suffix>Investigator Suffix 2</Suffix>
+				<Identifier Source="Some random Identifier Investigator Source 2">Investigator Identifier 2</Identifier>
+				<Affiliation PubModel="Print">Investigator Affiliation 2</Affiliation>
+			</Investigator>
+		</InvestigatorList>
+		<GeneralNote Owner="NLM">General Note 1</GeneralNote>
+		<GeneralNote Owner="NASA">General Note 2</GeneralNote>
+	</MedlineCitation>
+</MedlineCitationSet>
