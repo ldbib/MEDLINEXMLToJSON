@@ -36,6 +36,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 		whereAmI = new Array(),
 		lastDateTag = "",
 		nodeData = null,
+		ignoreTags = ["MedlineCitationSet", "Journal", "Pagination"], // tags to ignore text processing on
 		parser = {
 			"DeleteCitation": function(text) {
 				json.push ({
@@ -212,7 +213,9 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 		// The following two lines fixes the bug in sax when text is run twice, once when the tag opens and once when the tag closes.
 		if(whereAmI.length > 0) {
 			if(whereAmI[whereAmI.length-1] === nodeData.name) {
-				parser[whereAmI[whereAmI.length-1]] ? parser[whereAmI[whereAmI.length-1]](text) : parser._default(text);
+				if(ignoreTags.indexOf(nodeData.name) === -1) { // Ignore text processing of the tags in the ignoreTags array
+					parser[nodeData.name] ? parser[nodeData.name](text) : parser._default(text);
+				}
 			}
 		}
 	});
@@ -221,7 +224,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 		console.log(JSON.stringify(json)); // Output to JSON in the console.
 	});
 
-	fs.createReadStream('./example.xml').pipe(XMLParser); // Pipes the readstream of example.xml to the XML parser.
+	fs.createReadStream('./extensive-test.xml').pipe(XMLParser); // Pipes the readstream of example.xml to the XML parser.
 
 	function dateInsertion(text, type) {
 		if(["created", "completed", "revised"].indexOf(lastDateTag) !== -1) {
