@@ -63,12 +63,12 @@
 					<Initials>Author Initials</Initials>
 					<Suffix>Author Suffix</Suffix>
 					<Identifier Source="Some random Identifier Author Source 1">Author Identifier 1</Identifier>
-					<Affiliation PubModel="Print">Author Affiliation 1</Affiliation>
+					<Affiliation>Author Affiliation 1</Affiliation>
 				</Author>
 				<Author>
-					<CollectiveName RefType="ErratumFor">Author Collective Name</CollectiveName>
+					<CollectiveName>Author Collective Name</CollectiveName>
 					<Identifier Source="Some random Identifier Author Source 2">Author Identifier 2</Identifier>
-					<Affiliation PubModel="Print">Author Affiliation 2</Affiliation>
+					<Affiliation>Author Affiliation 2</Affiliation>
 				</Author>
 			</AuthorList>
 			<Language>ENG</Language>
