@@ -85,7 +85,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 			"DateCompleted": function(text) { lastDateTag = "completed"; json[json.length-1].dates.completed = {} },
 			"DateRevised": function(text) { lastDateTag = "revised"; json[json.length-1].dates.revised = {} },
 			"PubDate": function(text) { lastDateTag = "pubdate"; },
-			"ArticleDate": function(text) { lastDateTag = "articleDate"; json[json.length-1].articledate = {} },
+			"ArticleDate": function(text) { lastDateTag = "articleDate"; json[json.length-1].articleDate = {} },
 			"Year": function(text) { dateInsertion(text, "year"); },
 			"Month": function(text) { dateInsertion(text, "month"); },
 			"Day": function(text) { dateInsertion(text, "day"); },
@@ -228,8 +228,8 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 			json[json.length-1].dates[lastDateTag][type] = text;
 		} else if(lastDateTag === "pubdate") {
 			json[json.length-1].journal.pubdate[type] = text;
-		} else if(lastDateTag === "articledate") {
-			json[json.length-1].articledate[type] = text;
+		} else if(lastDateTag === "articleDate") {
+			json[json.length-1].articleDate[type] = text;
 		}
 	}
 
