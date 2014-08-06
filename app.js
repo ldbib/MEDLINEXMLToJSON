@@ -36,11 +36,11 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 		whereAmI = new Array(),
 		lastDateTag = "",
 		nodeData = null,
-		ignoreTags = ["MedlineCitationSet", "Journal", "Pagination"], // tags to ignore text processing on
+		ignoreTags = [ "MedlineCitationSet", "Journal", "Pagination", "PublicationTypeList", "MedlineJournalInfo" ], // tags to ignore text processing on
 		parser = {
 			"DeleteCitation": function(text) {
 				json.push ({
-					"delete": []
+					"delete": [ ]
 				});
 			},
 			"MedlineCitation": function(text) {
@@ -49,9 +49,9 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 					"status": 	nodeData.attributes.Status,
 					"_id": null,
 					"dates": {
-						"created": {}
+						"created": { }
 					},
-					"pubmodel": null,
+					"pubModel": null,
 					"article": null,
 					"journal": {
 						"title": null,
@@ -60,7 +60,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 						"eissn": null,
 						"lissn": null, // Linked issn
 						"citedMedium": null, // Internet/Print
-						"pubdate": {
+						"pubDate": {
 							"year": null
 						}
 					},
@@ -68,31 +68,40 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 						"fp": null, // First Page
 						"lp": null, // Last Page
 					},
-					"language": [],
-					"pubtype": [],
+					"language": [ ],
+					"pubtype": [ ],
 					"medlineAbbreviation": null
 				});
 			},
 			"PMID": function(text) {
 				if(whereAmI[whereAmI.length-2] === "MedlineCitation") {
 					json[json.length-1]._id = text;
+					json[json.length-1].pmidVersion = nodeData.attributes.Version;
 				} else if(whereAmI[whereAmI.length-2] === "DeleteCitation") {
-					json[json.length-1].delete.push(text);
+					json[json.length-1].delete.push( { "pmid": text, "version": nodeData.attributes.Version } );
 				} else if(whereAmI[whereAmI.length-2] === "CommentsCorrections") {
-					console.log("TODO!!!");
+					json[json.length-1].commentsCorrections[json[json.length-1].commentsCorrections.length-1].pmid = text;
+					json[json.length-1].commentsCorrections[json[json.length-1].commentsCorrections.length-1].pmidVersion = nodeData.attributes.Version;
 				}
 			},
 			"DateCreated": function(text) { lastDateTag = "created"; },
-			"DateCompleted": function(text) { lastDateTag = "completed"; json[json.length-1].dates.completed = {} },
-			"DateRevised": function(text) { lastDateTag = "revised"; json[json.length-1].dates.revised = {} },
+			"DateCompleted": function(text) { lastDateTag = "completed"; json[json.length-1].dates.completed = { } },
+			"DateRevised": function(text) { lastDateTag = "revised"; json[json.length-1].dates.revised = { } },
 			"PubDate": function(text) { lastDateTag = "pubdate"; },
-			"ArticleDate": function(text) { lastDateTag = "articleDate"; json[json.length-1].articleDate = {} },
+			"ArticleDate": function(text) {
+				lastDateTag = "articleDate";
+				if(typeof json[json.length-1].articleDate !== "object") {
+					json[json.length-1].articleDate = new Array( {} );
+				} else {
+					json[json.length-1].articleDate.push( {} );
+				}
+			},
 			"Year": function(text) { dateInsertion(text, "year"); },
 			"Month": function(text) { dateInsertion(text, "month"); },
 			"Day": function(text) { dateInsertion(text, "day"); },
 			"Season": function(text) { dateInsertion(text, "season"); },
 			"MedlineDate": function(text) { dateInsertion(text, "medlineDate"); },
-			"Article": function(text) { json[json.length-1].pubmodel = nodeData.attributes.PubModel; },
+			"Article": function(text) { json[json.length-1].pubModel = nodeData.attributes.PubModel; },
 			"Volume": function(text) { json[json.length-1].journal.volume = text; },
 			"Issue": function(text) { json[json.length-1].journal.issue = text; },
 			"ArticleTitle": function(text) { json[json.length-1].article = text; },
@@ -106,10 +115,10 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 			},
 			"JournalIssue": function(text) { json[json.length-1].journal.citedMedium = nodeData.attributes.CitedMedium },
 			"ELocationID": function(text) {
-				if(typeof json[json.length-1].pagnation.elocation !== "object") {
-					json[json.length-1].pagnation.elocation = new Array( { "type": nodeData.attributes.EIdType, "value": text } );
+				if(typeof json[json.length-1].elocation !== "object") {
+					json[json.length-1].elocation = new Array( { "type": nodeData.attributes.EIdType, "value": text } );
 				} else {
-					json[json.length-1].pagnation.elocation.push( { "type": nodeData.attributes.EIdType, "value": text } );
+					json[json.length-1].elocation.push( { "type": nodeData.attributes.EIdType, "value": text } );
 				}
 			},
 			"Abstract": function(text) { json[json.length-1].abstract = {}; },
@@ -117,7 +126,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 				if(typeof json[json.length-1].otherAbstracts !== "object") {
 					json[json.length-1].otherAbstracts = new Array( { "type": nodeData.attributes.Type, "language": nodeData.attributes.Language } );
 				} else {
-					json[json.length-1].otherAbstracts.push( { "type": nodeData.attributes.Type, "language": nodeData.attributes.Language }) ;
+					json[json.length-1].otherAbstracts.push( { "type": nodeData.attributes.Type, "language": nodeData.attributes.Language } );
 				}
 			},
 			"AbstractText": function(text) {
@@ -138,24 +147,30 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 			"CopyrightInformation": function(text) {
 				if(whereAmI[whereAmI.length-2] === "Abstract") {
 					json[json.length-1].abstract.copyright = text;
-				} else {
+				} else if(whereAmI[whereAmI.length-2] === "OtherAbstract") {
 					json[json.length-1].otherAbstracts[json[json.length-1].otherAbstracts.length-1].copyright = text;
 				}
 			},
 			"ChemicalList": function(text) { json[json.length-1].chemicals = new Array(); },
-			"Chemical": function(text) { json[json.length-1].chemicals.push({}); },
+			"Chemical": function(text) { json[json.length-1].chemicals.push( { } ); },
 			"RegistryNumber": function(text) { json[json.length-1].chemicals[json[json.length-1].chemicals.length-1].registryNumber = text; },
 			"NameOfSubstance": function(text) { json[json.length-1].chemicals[json[json.length-1].chemicals.length-1].nameOfSubstance = text; },
-			"GrantList": function(text) { json[json.length-1].grants = new Array(); },
-			"Grant": function(text) { json[json.length-1].grants.push({}); },
-			"GrantID": function(text) { json[json.length-1].grants[json[json.length-1].grants.length-1].grantID = text; },
-			"Acronym": function(text) { json[json.length-1].grants[json[json.length-1].grants.length-1].acronym = text; },
-			"Agency": function(text) { json[json.length-1].grants[json[json.length-1].grants.length-1].agency = text; },
+			"GrantList": function(text) {
+				if(typeof nodeData.attributes.CompleteYN === "string") {
+					json[json.length-1].grantList = { "list": new Array(), "complete": nodeData.attributes.CompleteYN === "N" ? false : true };
+				} else {
+					json[json.length-1].grantList = { "list": new Array() };
+				}
+			},
+			"Grant": function(text) { json[json.length-1].grantList.list.push( { } ); },
+			"GrantID": function(text) { grantInsertion(text, "grantID"); },
+			"Acronym": function(text) { grantInsertion(text, "acronym"); },
+			"Agency": function(text) { grantInsertion(text, "agency"); },
 			"Country": function(text) {
 				if(whereAmI[whereAmI.length-2] === "MedlineJournalInfo") {
 					json[json.length-1].country = text;
 				} else if(whereAmI[whereAmI.length-2] === "Grant") {
-					json[json.length-1].grants[json[json.length-1].grants.length-1].country = text;
+					grantInsertion(text, "country");
 				}
 				
 			},
@@ -163,36 +178,161 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 			"ISSN": function(text) { json[json.length-1].journal[(nodeData.attributes.IssnType === "Electronic" ? "eissn" : "issn")] = text; },
 			"Title": function(text) { json[json.length-1].journal.title = text; }, // Journal Title
 			"ISOAbbreviation": function(text) { json[json.length-1].journal.isoAbbreviation = text; },
-			"AuthorList": function(text) { json[json.length-1].authors = new Array(); },
-			"Author": function(text) { json[json.length-1].authors.push({}); },
+			"AuthorList": function(text) {
+				if(typeof nodeData.attributes.CompleteYN === "string") {
+					json[json.length-1].authors = { "list": new Array( ), "complete": nodeData.attributes.CompleteYN === "N" ? false : true };
+				} else {
+					json[json.length-1].authors = { "list": new Array( ) };
+				}
+			},
+			"Author": function(text) {
+				if(typeof nodeData.attributes.ValidYN === "string") {
+					json[json.length-1].authors.list.push( { "valid": nodeData.attributes.ValidYN === "N" ? false : true } );
+				} else {
+					json[json.length-1].authors.list.push( { } );
+				}
+			},
 			"LastName": function(text) { personInsertion(text, "lastName"); },
 			"ForeName": function(text) { personInsertion(text, "firstName"); },
 			"Initials": function(text) { personInsertion(text, "initials"); },
 			"Suffix": function(text) { personInsertion(text, "suffix"); },
 			"CollectiveName": function(text) { personInsertion(text, "collectiveName"); },
-			"Identifier": function(text) { personInsertion(text, "identifier"); },
+			"Identifier": function(text) {
+				if(whereAmI[whereAmI.length-2] === "Author") {
+					json[json.length-1].authors.list[json[json.length-1].authors.list.length-1].identifier = { "text": text, "source": nodeData.attributes.Source };
+				} else if(whereAmI[whereAmI.length-2] === "Investigator") {
+					json[json.length-1].investigators[json[json.length-1].investigators.length-1].identifier = { "text": text, "source": nodeData.attributes.Source };
+				}
+			},
 			"Affiliation": function(text) { personInsertion(text, "affiliation"); },
 			"PublicationType": function(text) { json[json.length-1].pubtype.push(text); },
 			"MedlineTA": function(text) { json[json.length-1].medlineAbbreviation = text; },
 			"NlmUniqueID": function(text) { json[json.length-1].nlmID = text; },
 			"OtherID": function(text) {
 				if(typeof json[json.length-1].otherID !== "object") {
-					json[json.length-1].otherID = new Array({"source": nodeData.attributes.Source, "text": text});
+					json[json.length-1].otherID = new Array( { "source": nodeData.attributes.Source, "text": text } );
 				} else {
-					json[json.length-1].otherID.push({"source": nodeData.attributes.Source, "text": text});
+					json[json.length-1].otherID.push( { "source": nodeData.attributes.Source, "text": text } );
 				}
 			},
 			"ISSNLinking": function(text) { json[json.length-1].journal.lissn = text; },
 			"KeywordList": function(text) {
 				if(typeof json[json.length-1].keywordList !== "object") {
-					json[json.length-1].keywordList = new Array( { "owner": nodeData.attributes.Owner, "list": new Array() } );
+					json[json.length-1].keywordList = new Array( { "owner": nodeData.attributes.Owner, "list": new Array( ) } );
 				} else {
-					json[json.length-1].keywordList.push( { "owner": nodeData.attributes.Owner, "list": new Array() } );
+					json[json.length-1].keywordList.push( { "owner": nodeData.attributes.Owner, "list": new Array( ) } );
 				}
 			},
 			"Keyword": function(text) {
-				json[json.length-1].keywordList[json[json.length-1].keywordList.length-1].list.push( { "major": ( nodeData.attributes.MajorTopicYN === "Y" ? true : false ) } );
-				json[json.length-1].keywordList[json[json.length-1].keywordList.length-1].list[json[json.length-1].keywordList[json[json.length-1].keywordList.length-1].list.length-1].text = text;
+				if(typeof nodeData.attributes.MajorTopicYN === "string") {
+					json[json.length-1].keywordList[json[json.length-1].keywordList.length-1].list.push({
+						"major": ( nodeData.attributes.MajorTopicYN === "Y" ? true : false ),
+						"text": text
+					});
+				} else {
+					json[json.length-1].keywordList[json[json.length-1].keywordList.length-1].list.push( { "text": text } );
+				}
+			},
+			"DataBankList": function(text) {
+				if(typeof nodeData.attributes.CompleteYN === "string") {
+					json[json.length-1].dataBankList = {"list": new Array(), "complete": nodeData.attributes.CompleteYN === "N" ? false : true };
+				} else {
+					json[json.length-1].dataBankList = {"list": new Array() };
+				}
+			},
+			"DataBank": function(text) { json[json.length-1].dataBankList.list.push( { } ); },
+			"DataBankName": function(text) {
+				json[json.length-1].dataBankList.list[json[json.length-1].dataBankList.list.length-1].name = text;
+			},
+			"AccessionNumberList": function(text) {
+				json[json.length-1].dataBankList.list[json[json.length-1].dataBankList.list.length-1].accessionNumbers = new Array( );
+			},
+			"AccessionNumber": function(text) {
+				json[json.length-1].dataBankList.list[json[json.length-1].dataBankList.list.length-1].accessionNumbers.push(text);
+			},
+			"SupplMeshList": function(text) {
+				json[json.length-1].supplMeshList = new Array( );
+			},
+			"SupplMeshName": function(text) {
+				json[json.length-1].supplMeshList.push( { "type": nodeData.attributes.Type, "name": text } );
+			},
+			"CitationSubset": function(text) {
+				if(typeof json[json.length-1].citationSubset !== "object") {
+					json[json.length-1].citationSubset = new Array( text );
+				} else {
+					json[json.length-1].citationSubset.push( text );
+				}
+			},
+			"CommentsCorrectionsList": function(text) {
+				json[json.length-1].commentsCorrections = new Array( );
+			},
+			"CommentsCorrections": function(text) { json[json.length-1].commentsCorrections.push( { "refType": nodeData.attributes.RefType } ); },
+			"RefSource": function(text) {
+				json[json.length-1].commentsCorrections[json[json.length-1].commentsCorrections.length-1].refSource = text;
+			},
+			"Note": function(text) {
+				json[json.length-1].commentsCorrections[json[json.length-1].commentsCorrections.length-1].note = text;
+			},
+			"GeneSymbolList": function(text) {
+				json[json.length-1].geneSymbols = new Array( );
+			},
+			"GeneSymbol": function(text) { json[json.length-1].geneSymbols.push( text ); },
+			"MeshHeadingList": function(text) {
+				json[json.length-1].meshHeadings = new Array( );
+			},
+			"MeshHeading": function(text) {
+				json[json.length-1].meshHeadings.push( { } );
+			},
+			"DescriptorName": function(text) {
+				if(typeof nodeData.attributes.MajorTopicYN === "string") {
+					json[json.length-1].meshHeadings[json[json.length-1].meshHeadings.length-1].descriptorName = {
+						"text": 		text,
+						"majorTopic": 	nodeData.attributes.MajorTopicYN === "Y" ? true : false,
+						"type": 		nodeData.attributes.Type
+					};
+				} else {
+					json[json.length-1].meshHeadings[json[json.length-1].meshHeadings.length-1].descriptorName = {
+						"text": 		text,
+						"type": 		nodeData.attributes.Type
+					};
+				}
+			},
+			"QualifierName": function(text) {
+				if(typeof nodeData.attributes.MajorTopicYN === "string") {
+					json[json.length-1].meshHeadings[json[json.length-1].meshHeadings.length-1].qualifierName = {
+						"text": 		text,
+						"majorTopic": 	nodeData.attributes.MajorTopicYN === "Y" ? true : false
+					};
+				} else {
+					json[json.length-1].meshHeadings[json[json.length-1].meshHeadings.length-1].qualifierName = {
+						"text": 		text
+					};
+				}
+			},
+			"NumberOfReferences": function(text) { json[json.length-1].numberOfReferences = text; },
+			"PersonalNameSubjectList": function(text) { json[json.length-1].personalNameSubjects = new Array( ); },
+			"PersonalNameSubject": function(text) { json[json.length-1].personalNameSubjects.push( { } ); },
+			"SpaceFlightMission": function(text) {
+				if(typeof json[json.length-1].spaceFlightMission !== "object") {
+					json[json.length-1].spaceFlightMission = new Array( text );
+				} else {
+					json[json.length-1].spaceFlightMission.push( text );
+				}
+			},
+			"InvestigatorList": function(text) { json[json.length-1].investigators = new Array(); },
+			"Investigator": function(text) {
+				if(typeof nodeData.attributes.ValidYN === "string") {
+					json[json.length-1].investigators.push( { "valid": nodeData.attributes.ValidYN === "N" ? false : true } );
+				} else {
+					json[json.length-1].investigators.push( { } );
+				}
+			},
+			"GeneralNote": function(text) {
+				if(typeof json[json.length-1].generalNote !== "object") {
+					json[json.length-1].generalNote = new Array( { "note": text, "owner": nodeData.attributes.Owner } );
+				} else {
+					json[json.length-1].generalNote.push( { "note": text, "owner": nodeData.attributes.Owner } );
+				}
 			},
 			"_default": function(text) {
 				console.log(JSON.stringify(nodeData));
@@ -230,18 +370,23 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 		if(["created", "completed", "revised"].indexOf(lastDateTag) !== -1) {
 			json[json.length-1].dates[lastDateTag][type] = text;
 		} else if(lastDateTag === "pubdate") {
-			json[json.length-1].journal.pubdate[type] = text;
+			json[json.length-1].journal.pubDate[type] = text;
 		} else if(lastDateTag === "articleDate") {
-			json[json.length-1].articleDate[type] = text;
+			json[json.length-1].articleDate[json[json.length-1].articleDate.length-1][type] = text;
 		}
 	}
 
 	function personInsertion(text, type) {
 		if(whereAmI[whereAmI.length-2] === "Author") {
-			json[json.length-1].authors[json[json.length-1].authors.length-1][type] = text;
-		} else {
-			console.log("TODO!!");
+			json[json.length-1].authors.list[json[json.length-1].authors.list.length-1][type] = text;
+		} else if(whereAmI[whereAmI.length-2] === "PersonalNameSubject") {
+			json[json.length-1].personalNameSubjects[json[json.length-1].personalNameSubjects.length-1][type] = text;
+		} else if(whereAmI[whereAmI.length-2] === "Investigator") {
+			json[json.length-1].investigators[json[json.length-1].investigators.length-1][type] = text;
 		}
 	}
 
+	function grantInsertion(text, type) {
+		json[json.length-1].grantList.list[json[json.length-1].grantList.list.length-1][type] = text;
+	}
 }());
