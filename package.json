@@ -1,12 +1,12 @@
 {
-  "name": "MEDLINEXMLToJSON",
+  "name": "medlinexmltojson",
   "description": "Software to parse MEDLINE XML to JSON.",
   "repository": {
     "type": "git",
     "url": "http://github.com/ldbib/MEDLINEXMLToJSON.git"
   },
   "version": "1.0.0",
-  "private": true,
+  "private": false,
   "dependencies": {
     "sax": "0.6.x"
   },

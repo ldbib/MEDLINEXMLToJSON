@@ -13,6 +13,21 @@ It's developed for the 2014 version of the MEDLINE® XML DTD (Document type defi
 ## Dependencies
 The only dependency is the XML parser [sax](https://github.com/isaacs/sax-js) by [Isaac Z. Schlueter](https://github.com/isaacs).
 
+## Installation
+```
+npm install medlinexmltojson
+```
+
+## Example usage
+```JavaScript
+var medline2json = require("medlinexmltojson");
+
+medline2json.parse("myxmlfile.xml", function(err, json) {
+	// err is a string saying what's wrong. It's null if there's not an error.
+	// json is the json string. It's null if there's an error.
+});
+```
+
 ## License
 This project is released under the terms of the [GNU AGPL version 3](https://www.gnu.org/licenses/agpl.html)
 
@@ -20,6 +35,12 @@ This project is released under the terms of the [GNU AGPL version 3](https://www
 [Emil Hemdal](https://github.com/emilhem)
 
 ## Changelog
+
+### Version 1.0 - 6th of August 2014
+Test added.
+Can and should be used as a module.
+Moved around files.
+Added an extensive test xml that contains a lot of the different possibilites that the MEDLINE® XML file could contain.
 
 ### Version 0.1 - 30th of July 2014
 Basic usage with example file. Can not be used as a module yet!
