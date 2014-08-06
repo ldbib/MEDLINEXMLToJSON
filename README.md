@@ -36,6 +36,9 @@ This project is released under the terms of the [GNU AGPL version 3](https://www
 
 ## Changelog
 
+### Version 1.0.1 - 6th of August 2014
+Changed to 1.0.1 to make npm less grumpy with publishing under the same version.
+
 ### Version 1.0 - 6th of August 2014
 Test added.
 Can and should be used as a module.
