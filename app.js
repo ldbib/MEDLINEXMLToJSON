@@ -20,11 +20,11 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 */
 
-(function() {
-	"use strict";
-	var fs 			= require("fs"),
-		sax 		= require("sax");
+var fs 			= require("fs"),
+	sax 		= require("sax");
 
+exports.parse = function(path, callback) {
+	"use strict";
 	// We use the steam functionality of sax since the MEDLINE files tend to be quite large and to load a 100MB large XML file 
 	// into memory is a bad idea when Node.js can process it on the go saving memory.
 	var XMLParser = sax.createStream(true, { // true means XML parsing
@@ -34,6 +34,8 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 	var json 	= new Array(),
 		whereAmI = new Array(),
+		errorHappened = false,
+		fileSteam,
 		lastDateTag = "",
 		nodeData = null,
 		ignoreTags = [ "MedlineCitationSet", "Journal", "Pagination", "PublicationTypeList", "MedlineJournalInfo" ], // tags to ignore text processing on
@@ -360,11 +362,34 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 		}
 	});
 	XMLParser.on("end", function(text) { // Runs when all the XML processing is done.
-		console.log("\nEND JSON:");
-		console.log(JSON.stringify(json)); // Output to JSON in the console.
+		callback(null, JSON.stringify(json));
 	});
-
-	fs.createReadStream('./extensive-test.xml').pipe(XMLParser); // Pipes the readstream of example.xml to the XML parser.
+	XMLParser.on("error", function(error) { // Error happended
+		// Stop it from calling callback more than once.
+		// You can't stop the parsing (what I know of) since it's a continous stream, you can stop the stream from writing though
+		if(errorHappened) {
+			return;
+		}
+		errorHappened = true;
+		fileSteam.unpipe(XMLParser); // Unpipe the stream to avoid writing more data to it.
+		callback("File is not a correct XML file.", null);
+	});
+	
+	fs.stat(path, function(err, stats) {
+		if(err) {
+			return callback("File does not exist!", null);
+		}
+		if(stats.isFile()) {
+			try {
+				fileSteam = fs.createReadStream(path);
+				fileSteam.pipe(XMLParser); // Pipes the readstream of path to the XML parser.
+			} catch (error) {
+				callback("File does not exist!", null);
+			}
+		} else {
+			callback("Path is not a file!", null);
+		}
+	});
 
 	function dateInsertion(text, type) {
 		if(["created", "completed", "revised"].indexOf(lastDateTag) !== -1) {
@@ -389,4 +414,4 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 	function grantInsertion(text, type) {
 		json[json.length-1].grantList.list[json[json.length-1].grantList.list.length-1][type] = text;
 	}
-}());
+}
