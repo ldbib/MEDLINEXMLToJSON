@@ -1,4 +1,4 @@
-m2json = require("./app.js");
+m2json = require("../lib/app.js");
 
 m2json.parse("../test", function(err, str) {
 	if(str === null) {
