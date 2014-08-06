@@ -218,7 +218,7 @@
 				<Initials>Investigator Initials 1</Initials>
 				<Suffix>Investigator Suffix 1</Suffix>
 				<Identifier Source="Some random Identifier Investigator Source 1">Investigator Identifier 1</Identifier>
-				<Affiliation PubModel="Print">Investigator Affiliation 1</Affiliation>
+				<Affiliation>Investigator Affiliation 1</Affiliation>
 			</Investigator>
 			<Investigator ValidYN="Y">
 				<LastName>Investigator Last Name 2</LastName>
@@ -226,7 +226,7 @@
 				<Initials>Investigator Initials 2</Initials>
 				<Suffix>Investigator Suffix 2</Suffix>
 				<Identifier Source="Some random Identifier Investigator Source 2">Investigator Identifier 2</Identifier>
-				<Affiliation PubModel="Print">Investigator Affiliation 2</Affiliation>
+				<Affiliation>Investigator Affiliation 2</Affiliation>
 			</Investigator>
 		</InvestigatorList>
 		<GeneralNote Owner="NLM">General Note 1</GeneralNote>
