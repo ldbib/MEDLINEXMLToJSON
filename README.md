@@ -19,10 +19,36 @@ npm install medlinexmltojson
 ```
 
 ## Example usage
+
+### Simple example
 ```JavaScript
 var medline2json = require("medlinexmltojson");
 
 medline2json.parse("myxmlfile.xml", function(err, json) {
+	// err is a string saying what's wrong. It's null if there's not an error.
+	// json is the json string. It's null if there's an error.
+});
+```
+
+### Stream example
+```JavaScript
+var medline2json = require("medlinexmltojson"),
+	fs = require("fs");
+
+medline2json.parse(fs.createReadStream("./myxmlfile.xml"), function(err, json) {
+	// err is a string saying what's wrong. It's null if there's not an error.
+	// json is the json string. It's null if there's an error.
+});
+```
+
+### Stream example with gzipping
+```JavaScript
+var medline2json = require("medlinexmltojson"),
+	fs = require("fs"),
+	zlib = require('zlib'),
+	gzip = zlib.createGunzip();
+
+medline2json.parse(fs.createReadStream("./myxmlfile.xml.gz").pipe(gzip), function(err, json) {
 	// err is a string saying what's wrong. It's null if there's not an error.
 	// json is the json string. It's null if there's an error.
 });
@@ -35,6 +61,10 @@ This project is released under the terms of the [GNU AGPL version 3](https://www
 [Emil Hemdal](https://github.com/emilhem)
 
 ## Changelog
+
+### Version 1.1.0 - 15th of August 2014
+Added data streaming functionality.
+Improved test.
 
 ### Version 1.0.1 - 6th of August 2014
 Changed to 1.0.1 to make npm less grumpy with publishing under the same version.
