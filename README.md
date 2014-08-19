@@ -54,6 +54,15 @@ medline2json.parse(fs.createReadStream("./myxmlfile.xml.gz").pipe(gzip), functio
 });
 ```
 
+### Continous "streaming" of JSON example
+```JavaScript
+var medline2json = require("medlinexmltojson");
+
+medline2json.parse("myxmlfile.xml", true, function(err, json) {
+	// Callback will be run as many times as there are MEDLINE data in the XML file.
+});
+```
+
 ## License
 This project is released under the terms of the [GNU AGPL version 3](https://www.gnu.org/licenses/agpl.html)
 
@@ -61,6 +70,9 @@ This project is released under the terms of the [GNU AGPL version 3](https://www
 [Emil Hemdal](https://github.com/emilhem)
 
 ## Changelog
+
+### Version 1.2.0 - 19th of August 2014
+Added optional alternative callback functionality to continously call callback with each MEDLINE entry in JSON instead of all the JSON at once.
 
 ### Version 1.1.0 - 15th of August 2014
 Added data streaming functionality.
