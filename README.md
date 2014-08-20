@@ -71,6 +71,9 @@ This project is released under the terms of the [GNU AGPL version 3](https://www
 
 ## Changelog
 
+### Version 1.2.1 - 20th of August 2014
+Made numbers actual numbers in the JSON string instead of everything being strings.
+
 ### Version 1.2.0 - 19th of August 2014
 Added optional alternative callback functionality to continously call callback with each MEDLINE entry in JSON instead of all the JSON at once.
 
